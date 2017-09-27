@@ -3,26 +3,33 @@ title: "Titi Monkeys"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+#0<x<30,mean=15, range=31 (including 0)
+
+proba<-(1-(8/31))
+#probability of x>8 = 1-( x<= 7), prob(x<=7) = 8/31
+proba
+```
+```{r}
+probb<-(1/31)
+#probability of hearing exactly 0 calls
+probb
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+probc<-(1/31)
+#probability of hearing exactly 3 calls
+probc
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+x <- 0:30
+l = 15
+probset <- dpois(x = x, lambda = l)
+barplot(probset, names.arg = x, space = 0, xlab = "Number of Calls", ylab = "Probability", main = "Probability Mass Function")
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+library(manipulate)
+outcomes<-(0:30)
+manipulate(hist(sample(outcomes, n, replace = TRUE), breaks = seq(0, 30, 1), col = "purple", probability = TRUE, main = paste("Histogram of Outcomes of ", n, " Days of Listening", sep = ""), xlab = "Number of Calls", ylab = "probability", xlim = c(0,30), ylim = c(0, .09)), n = slider(0, 10000, initial = 104, step = 100))
+```
