@@ -6,15 +6,15 @@ output: html_document
 
 ```{r}
 #0<x<30,mean=15, range=31 (including 0)
+#each possibility does NOT have equal chance of happening
 
-proba<-(1-(8/31))
-#probability of x>8 = 1-( x<= 7), prob(x<=7) = 8/31
-proba
+proba2<-ppois(8, lambda=15, lower=FALSE)
+proba2
 ```
 ```{r}
-probb<-(1/31)
+probb2<-ppois(0,lambda = 15)
 #probability of hearing exactly 0 calls
-probb
+probb2
 ```
 
 ```{r}
@@ -27,7 +27,7 @@ probc
 x <- 0:30
 l = 15
 probset <- dpois(x = x, lambda = l)
-barplot(probset, names.arg = x, space = 0, xlab = "Number of Calls", ylab = "Probability", xlim = c(0, 30), main = "Probability Mass Function")
+barplot(probset, names.arg = x, space = 0, xlab = "Number of Calls", ylab = "Probability", xlim = c(0, 30), col = "purple", main = "Probability Mass Function")
 ```
 ```{r}
 library(manipulate)
