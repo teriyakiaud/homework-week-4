@@ -31,6 +31,7 @@ barplot(probset, names.arg = x, space = 0, xlab = "Number of Calls", ylab = "Pro
 ```
 ```{r}
 library(manipulate)
+
 outcomes<-(0:30)
 manipulate(hist(sample(outcomes, n, replace = TRUE), breaks = seq(0, 30, 1), col = "purple", probability = TRUE, main = paste("Histogram of Outcomes of ", n, " Days of Listening", sep = ""), xlab = "Number of Calls", ylab = "probability", xlim = c(0,30), ylim = c(0, .09)), n = slider(0, 10000, initial = 104, step = 100))
 #produces histogram showing results of 104 days recording 0 to 30 calls 
