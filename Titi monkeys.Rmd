@@ -18,7 +18,7 @@ probb2
 ```
 
 ```{r}
-probc<-(1/31)
+probc<-(ppois (4, lambda = 15) - ppois(2, lambda = 15))
 #probability of hearing exactly 3 calls
 probc
 ```
@@ -34,5 +34,8 @@ library(manipulate)
 outcomes<-(0:30)
 manipulate(hist(sample(outcomes, n, replace = TRUE), breaks = seq(0, 30, 1), col = "purple", probability = TRUE, main = paste("Histogram of Outcomes of ", n, " Days of Listening", sep = ""), xlab = "Number of Calls", ylab = "probability", xlim = c(0,30), ylim = c(0, .09)), n = slider(0, 10000, initial = 104, step = 100))
 #produces histogram showing results of 104 days recording 0 to 30 calls 
-#histogram does not match Poisson distribution above
+#histogram does not match Poisson distribution above but the percentages seem like they could be correct
+#also not sure if this code produces a histogram of a poisson distribution or normal distribution but I think this works
 ```
+
+
