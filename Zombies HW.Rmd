@@ -1,0 +1,132 @@
+---
+title: "Zombies HW"
+Author: Audrey Tjahjadi
+output: html_document
+---
+
+```{r}
+f<-"C:/Users/Audrey/Desktop/zombies.csv"
+d<-read.csv(f)
+head(d)
+```
+
+```{r}
+muh<-(d$height)
+meanh<-mean(muh)
+meanh
+varmuh <- function(muh) {
+     sqrt(sum((muh - mean(muh))^2)/(length(muh)))
+}
+varmuh(muh)
+```
+```{r}
+muw<-(d$weight)
+meanw<-mean(muw)
+meanw
+varmuw <- function(muw) {
+     sqrt(sum((muw - mean(muw))^2)/(length(muw)))
+}
+varmuw(muw)
+```
+```{r}
+muy<-(d$years_of_education)
+meany<-mean(muy)
+meany
+varmuy <- function(muy) {
+     sqrt(sum((muy - mean(muy))^2)/(length(muy)))
+}
+varmuy(muy)
+```
+```{r}
+muz<-(d$zombies_killed)
+meanz<-mean(muz)
+meanz
+varmuz <- function(muz) {
+     sqrt(sum((muz - mean(muz))^2)/(length(muz)))
+}
+varmuz(muz)
+```
+```{r}
+mua<-(d$age)
+meana<-mean(mua)
+meana
+varmua <- function(mua) {
+     sqrt(sum((mua - mean(mua))^2)/(length(mua)))
+}
+varmua(mua)
+```
+```{r}
+library(ggplot2)
+p <- ggplot(data = d, aes(x = gender, y = height))
+p <- p + geom_boxplot()
+p <- p + theme(axis.text.x = element_text(angle = 90))
+p <- p + ylab("Height")
+p
+```
+
+```{r}
+library(ggplot2)
+p2 <- ggplot(data = d, aes(x = gender, y = weight))
+p2 <- p2 + geom_boxplot()
+p2 <- p2 + theme(axis.text.x = element_text(angle = 90))
+p2 <- p2 + ylab("Weight")
+p2
+```
+
+```{r}
+library(ggplot2)
+p3 <- ggplot(data = d, aes(x = gender, y = years_of_education))
+p3 <- p3 + geom_boxplot()
+p3 <- p3 + theme(axis.text.x = element_text(angle = 90))
+p3 <- p3 + ylab("Years of Education")
+p3
+```
+
+```{r}
+library(ggplot2)
+p4 <- ggplot(data = d, aes(x = gender, y = zombies_killed))
+p4 <- p4 + geom_boxplot()
+p4 <- p4 + theme(axis.text.x = element_text(angle = 90))
+p4 <- p4 + ylab("Zombies Killed")
+p4
+```
+
+```{r}
+library(ggplot2)
+p5 <- ggplot(data = d, aes(x = gender, y = age))
+p5 <- p5 + geom_boxplot()
+p5 <- p5 + theme(axis.text.x = element_text(angle = 90))
+p5 <- p5 + ylab("Age")
+p5
+```
+
+```{r}
+library(ggplot2)
+
+scatter<- ggplot(data = d, aes(x = age, y = weight)) 
+scatter <- scatter + xlab("Age") + ylab("Weight")
+scatter <- scatter + geom_point() 
+scatter <- scatter + theme(legend.position = "bottom", legend.title = element_blank())  
+scatter 
+
+
+```
+```{r}
+par(mfrow = c(2, 3))  #two panels
+attach(d)
+hist(muh, freq = FALSE, col = "purple", main = "Height")
+hist(muw, freq = FALSE, col = "purple", main = "Weight")
+hist(muy, freq = FALSE, col = "purple", main = "Years of Education")
+hist(muz, freq = FALSE, col = "purple", main = "Zombies killed")
+hist(mua, freq = FALSE, col = "purple", main = "Age")
+```
+```{r}
+attach(d)
+par(mfrow = c(2,3))
+qqnorm(muh, main = "Q-Q Plot", xlab = "Height", plot.it = TRUE, datax = FALSE)
+qqnorm(muw, main = "Q-Q Plot", xlab = "Height", plot.it = TRUE, datax = FALSE)
+qqnorm(muy, main = "Q-Q Plot", xlab = "Height", plot.it = TRUE, datax = FALSE)
+qqnorm(muz, main = "Q-Q Plot", xlab = "Height", plot.it = TRUE, datax = FALSE)
+qqnorm(mua, main = "Q-Q Plot", xlab = "Height", plot.it = TRUE, datax = FALSE)
+```
+
