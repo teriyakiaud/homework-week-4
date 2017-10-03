@@ -146,28 +146,88 @@ s
 ```
 ```{r}
 sm<-s$height
-mean(sm)
-sd(sm)
+m <- mean(sm)
+m
+n <- length(sm)
+n
+v <- var(sm)
+v
+s <- sd(sm)
+s
+e <- sqrt(v/n)
+e
+upper <- mean(sm) + qnorm(0.975, mean = mean(sm), sd = sd(sm)) * e
+lower <- mean(sm) - qnorm(0.025, mean = mean(sm), sd = sd(sm)) * e   
+ci <- c(lower, upper)
+ci
 ```
 ```{r}
 sw<-s$weight
-mean(sw)
-sd(sw)
+m1 <- mean(sw)
+m1
+n1 <- length(sw)
+n1
+v1 <- var(sw)
+v1
+s1 <- sd(sw)
+s1
+e1 <- sqrt(v/n)
+e1
+upper1 <- mean(sw) + qnorm(0.975, mean = mean(sw), sd = sd(sw)) * e1
+lower1 <- mean(sw) - qnorm(0.025, mean = mean(sw), sd = sd(sw)) * e1
+ci1 <- c(lower1, upper1)
+ci1
 ```
 ```{r}
 sy<-s$years_of_education
-mean(sy)
-sd(sy)
+#poisson not normal
+m4 <- mean(sy)
+m4
+l1 <- (sum(sy)/ 30)
+l1
+n4 <- length(sy)
+n4
+e4 <- sqrt(l1/n4)
+e4
+upper4 <- l + 1.96*e4 
+lower4 <- l - 1.96*e4 
+lower4
+upper4
 ```
 ```{r}
 sz<-s$zombies_killed
-mean(sz)
-sd(sz)
+#poisson not normal
+m3<-mean(sz)
+m3
+l<-(sum(sz)/ 30) #l is equal to number of events divided by units in data
+l
+n3<- length(sz)
+n3
+e3<- sqrt(l/n3)
+e3
+upper3<- l + 1.96*e3
+lower3<- l - 1.96*e3
+lower3 
+upper3
+
 ```
+
 ```{r}
 sa<-s$age
-mean(sa)
-sd(sa)
+m2 <- mean(sa)
+m2
+n2 <- length(sa)
+n2
+v2 <- var(sa)
+v2
+s2 <- sd(sa)
+s2
+e2 <- sqrt(v/n)
+e2
+upper2 <- mean(sa) + qnorm(0.975, mean = mean(sa), sd = sd(sa)) * e2
+lower2 <- mean(sa) - qnorm(0.025, mean = mean(sa), sd = sd(sa)) * e2
+ci2 <- c(lower2, upper2)
+ci2
 ```
 
 
