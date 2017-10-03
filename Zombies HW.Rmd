@@ -162,7 +162,7 @@ ci <- c(lower, upper)
 ci
 ```
 ```{r}
-sw <- s$weight
+sw <- s$weight #does not want to knit past this point, could not find reason why, did not understande error message
 m1 <- mean(sw)
 m1
 n1 <- length(sw)
@@ -245,4 +245,6 @@ m <- NULL
 for(i in 1:k) {
   m[[i]] <- mean(s99[[i]][ ,"weight"])
 }
+
+#error is given saying undefined columns selected, not sure why, could not find answer
 ```
