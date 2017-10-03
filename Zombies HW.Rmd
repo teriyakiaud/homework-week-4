@@ -109,8 +109,15 @@ scatter <- scatter + geom_point()
 scatter <- scatter + theme(legend.position = "bottom", legend.title = element_blank())  
 scatter 
 
-
 ```
+```{r}
+scatter1<- ggplot(data = d, aes(x = age, y = height)) 
+scatter1 <- scatter1 + xlab("Age") + ylab("Height")
+scatter1 <- scatter1 + geom_point() 
+scatter1 <- scatter1 + theme(legend.position = "bottom", legend.title = element_blank())  
+scatter1 
+```
+
 ```{r}
 par(mfrow = c(2, 3))  #two panels
 attach(d)
@@ -119,14 +126,50 @@ hist(muw, freq = FALSE, col = "purple", main = "Weight")
 hist(muy, freq = FALSE, col = "purple", main = "Years of Education")
 hist(muz, freq = FALSE, col = "purple", main = "Zombies killed")
 hist(mua, freq = FALSE, col = "purple", main = "Age")
+
+#years of education and zombies killed do not follow the normal distribution. This makes sense as they are count data and should follow the Poisson distribution. 
 ```
 ```{r}
 attach(d)
 par(mfrow = c(2,3))
 qqnorm(muh, main = "Q-Q Plot", xlab = "Height", plot.it = TRUE, datax = FALSE)
-qqnorm(muw, main = "Q-Q Plot", xlab = "Height", plot.it = TRUE, datax = FALSE)
-qqnorm(muy, main = "Q-Q Plot", xlab = "Height", plot.it = TRUE, datax = FALSE)
-qqnorm(muz, main = "Q-Q Plot", xlab = "Height", plot.it = TRUE, datax = FALSE)
-qqnorm(mua, main = "Q-Q Plot", xlab = "Height", plot.it = TRUE, datax = FALSE)
+qqnorm(muw, main = "Q-Q Plot", xlab = "Weight", plot.it = TRUE, datax = FALSE)
+qqnorm(muy, main = "Q-Q Plot", xlab = "Years", plot.it = TRUE, datax = FALSE)
+qqnorm(muz, main = "Q-Q Plot", xlab = "Zombies", plot.it = TRUE, datax = FALSE)
+qqnorm(mua, main = "Q-Q Plot", xlab = "Age", plot.it = TRUE, datax = FALSE)
 ```
+
+```{r}
+s<-d[sample(nrow(d), 30, replace = FALSE, prob = NULL), ]
+#if replace = FALSE after () add , and one space close brackets
+s
+```
+```{r}
+sm<-s$height
+mean(sm)
+sd(sm)
+```
+```{r}
+sw<-s$weight
+mean(sw)
+sd(sw)
+```
+```{r}
+sy<-s$years_of_education
+mean(sy)
+sd(sy)
+```
+```{r}
+sz<-s$zombies_killed
+mean(sz)
+sd(sz)
+```
+```{r}
+sa<-s$age
+mean(sa)
+sd(sa)
+```
+
+
+
 
