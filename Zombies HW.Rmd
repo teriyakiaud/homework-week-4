@@ -162,7 +162,7 @@ ci <- c(lower, upper)
 ci
 ```
 ```{r}
-sw<-s$weight
+sw <- s$weight
 m1 <- mean(sw)
 m1
 n1 <- length(sw)
@@ -229,7 +229,20 @@ lower2 <- mean(sa) - qnorm(0.025, mean = mean(sa), sd = sd(sa)) * e2
 ci2 <- c(lower2, upper2)
 ci2
 ```
+```{r}
+attach(d)
+k <- 99  # number of samples
+n <- 30  # size of each sample
+s99 <- NULL  # dummy variable to hold each sample
+for (i in 1:k) {
+    s99[[i]] <- sample(d, size = n, replace = TRUE)
+}
+head(s99)
+```
 
-
-
-
+```{r}
+m <- NULL
+for(i in 1:k) {
+  m[[i]] <- mean(s99[[i]][ ,"weight"])
+}
+```
