@@ -127,7 +127,7 @@ hist(muy, freq = FALSE, col = "purple", main = "Years of Education")
 hist(muz, freq = FALSE, col = "purple", main = "Zombies killed")
 hist(mua, freq = FALSE, col = "purple", main = "Age")
 
-#years of education and zombies killed do not follow the normal distribution. This makes sense as they are count data and should follow the Poisson distribution. 
+#years of education and zombies killed do not follow the normal distribution. Their histograms resemble a Bernoulli distribution.  
 ```
 ```{r}
 attach(d)
@@ -144,107 +144,115 @@ s<-d[sample(nrow(d), 30, replace = FALSE, prob = NULL), ]
 #if replace = FALSE after () add , and one space close brackets
 s
 ```
+
 ```{r}
-sm<-s$height
-m <- mean(sm)
-m
-n <- length(sm)
-n
-v <- var(sm)
-v
-s <- sd(sm)
-s
-e <- sqrt(v/n)
-e
-upper <- mean(sm) + qnorm(0.975, mean = mean(sm), sd = sd(sm)) * e
-lower <- mean(sm) - qnorm(0.025, mean = mean(sm), sd = sd(sm)) * e   
-ci <- c(lower, upper)
-ci
+library(sciplot)
+
+s_h<-sample(d$height,size=30,replace=FALSE)
+mean(s_h)
+sd(s_h)
+se(s_h)
+upper_h<-mean(s_h)+qnorm(0.975,mean=0,sd=1)*se(s_h)
+lower_h<-mean(s_h)+qnorm(0.025,mean=0,sd=1)*se(s_h)
+ci_h<-c(lower_h,upper_h)
+ci_h
+```
+```{r, eval = FALSE}
+s_w <- sample(d$weight, size = 30, replace = FALSE) #does not want to knit past this point, could not find reason why, did not understande error message
+mean(s_w)
+s_wsd<-sd(s_w)
+upper_w <- mean(s_w) + qnorm(0.975, mean = 0, sd = 1) * se(s_w)
+lower_w <- mean(s_w) - qnorm(0.025, mean = 0, sd = 1) * se(s_w)
+ci_w <- c(lower1, upper1)
+ci_w
+
 ```
 ```{r}
-sw <- s$weight #does not want to knit past this point, could not find reason why, did not understande error message
-m1 <- mean(sw)
-m1
-n1 <- length(sw)
-n1
-v1 <- var(sw)
-v1
-s1 <- sd(sw)
-s1
-e1 <- sqrt(v/n)
-e1
-upper1 <- mean(sw) + qnorm(0.975, mean = mean(sw), sd = sd(sw)) * e1
-lower1 <- mean(sw) - qnorm(0.025, mean = mean(sw), sd = sd(sw)) * e1
-ci1 <- c(lower1, upper1)
-ci1
+#cannot assume normality for this as years of education did not show normality
+s_y<-sample(d$years_of_education,size=30,replace=FALSE)
+mean(s_y)
+s_ysd<-sd(s_y)
 ```
 ```{r}
-sy<-s$years_of_education
-#poisson not normal
-m4 <- mean(sy)
-m4
-l1 <- (sum(sy)/ 30)
-l1
-n4 <- length(sy)
-n4
-e4 <- sqrt(l1/n4)
-e4
-upper4 <- l + 1.96*e4 
-lower4 <- l - 1.96*e4 
-lower4
-upper4
-```
-```{r}
-sz<-s$zombies_killed
-#poisson not normal
-m3<-mean(sz)
-m3
-l<-(sum(sz)/ 30) #l is equal to number of events divided by units in data
-l
-n3<- length(sz)
-n3
-e3<- sqrt(l/n3)
-e3
-upper3<- l + 1.96*e3
-lower3<- l - 1.96*e3
-lower3 
-upper3
+set<-NULL  # sets up a dummy variable to hold our simulations
+n<-15
+for (i in 1:10000) {
+    set[i]<-mean(sample(s_y,n,replace=TRUE))
+}
+quantile(set,c(0.025,0.975))
 
 ```
 
+
 ```{r}
-sa<-s$age
-m2 <- mean(sa)
-m2
-n2 <- length(sa)
-n2
-v2 <- var(sa)
-v2
-s2 <- sd(sa)
-s2
-e2 <- sqrt(v/n)
-e2
-upper2 <- mean(sa) + qnorm(0.975, mean = mean(sa), sd = sd(sa)) * e2
-lower2 <- mean(sa) - qnorm(0.025, mean = mean(sa), sd = sd(sa)) * e2
-ci2 <- c(lower2, upper2)
-ci2
+#cannot assume normality for this zombies killed as histogram did not show normality
+s_z<-sample(d$zombies_killed,size=30,replace=FALSE)
+mean(s_z)
+sd(s_z)
 ```
+```{r}
+set<-NULL  # sets up a dummy variable to hold our simulations
+n<-15
+for (i in 1:10000) {
+    set[i]<-mean(sample(s_z,n,replace=TRUE))
+}
+quantile(set,c(0.025,0.975))
+```
+
+
+```{r}
+s_a<-sample(d$age,size=30,replace=FALSE)
+mean(s_a)
+s_asd<-sd(s_a)
+upper_a<-mean(s_a)+qnorm(0.975,mean=0,sd=1)*se(s_a)
+lower_a<-mean(s_a)+qnorm(0.025,mean=0,sd=1)*se(s_a)
+ci_a<-c(lower_a,upper_a)
+ci_a
+```
+
+
 ```{r}
 attach(d)
-k <- 99  # number of samples
-n <- 30  # size of each sample
-s99 <- NULL  # dummy variable to hold each sample
-for (i in 1:k) {
-    s99[[i]] <- sample(d, size = n, replace = TRUE)
+height2<-NULL
+for (i in 1:100) {
+    height2[i] <- mean(sample(d$height,30))
 }
-head(s99)
+mean(height2)
+sd(height2)
+```
+```{r}
+weight2<-NULL
+for (i in 1:100) {
+    weight2[i] <- mean(sample(d$weight,30))
+}
+mean(weight2)
+sd(weight2)
 ```
 
 ```{r}
-m <- NULL
-for(i in 1:k) {
-  m[[i]] <- mean(s99[[i]][ ,"weight"])
+edu2<-NULL
+for (i in 1:100) {
+    edu2[i] <- mean(sample(d$years_of_education,30))
+}
+mean(edu2)
+sd(edu2)
+```
+```{r}
+kill2<-NULL
+for (i in 1:100) {
+    kill2[i] <- mean(sample(d$zombies_killed,30))
 }
 
-#error is given saying undefined columns selected, not sure why, could not find answer
+mean(kill2)
+sd(kill2)
+```
+
+```{r}
+age2<-NULL
+for (i in 1:100) {
+    age2[i] <- mean(sample(d$age,30))
+}
+
+mean(age2)
+sd(age2)
 ```
